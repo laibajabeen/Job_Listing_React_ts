@@ -13,8 +13,8 @@ const JobsListings: FC<JobsListingsProps> = ({ isHome = false }) => {
 
   useEffect(() => {
     const apiUrl = isHome
-      ? import.meta.env.VITE_BACKEND_URL + "/jobs?_limit=3"
-      : import.meta.env.VITE_BACKEND_URL + "/jobs";
+      ? import.meta.env.VITE_BACKEND_URL + "?_limit=3"
+      : import.meta.env.VITE_BACKEND_URL;
     const fetchJobs = async () => {
       try {
         const res = await fetch(apiUrl);
