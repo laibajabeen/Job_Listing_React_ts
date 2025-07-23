@@ -2,8 +2,10 @@ import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import type { FC } from "react";
+import { Suspense, type FC } from "react";
+import axios from "axios";
 
+import type { Job } from "../types";
 interface JobsPagesProps {
   deleteJob: (id: string) => void;
 }
@@ -11,7 +13,7 @@ interface JobsPagesProps {
 const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
   const navigate = useNavigate();
 
-  const job = useLoaderData();
+  const job = useLoaderData() as Job;
 
   const onDeleteClick = (jobId) => {
     const confirm = window.confirm(
@@ -23,7 +25,7 @@ const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
     navigate("/jobs");
   };
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <section>
         <div className="container m-auto py-6 px-6">
           <Link
@@ -40,11 +42,11 @@ const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
           <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
             <main>
               <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
-                <div className="text-gray-500 mb-4">{job.type}</div>
-                <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
+                <div className="text-gray-500 mb-4">{job?.type}</div>
+                <h1 className="text-3xl font-bold mb-4">{job?.title}</h1>
                 <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
                   <FaMapMarker className=" text-orange-700 mr-1" />
-                  <p className="text-orange-700">{job.location}</p>
+                  <p className="text-orange-700">{job?.location}</p>
                 </div>
               </div>
 
@@ -53,13 +55,13 @@ const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
                   Job Description
                 </h3>
 
-                <p className="mb-4">{job.description}</p>
+                <p className="mb-4">{job?.description}</p>
 
                 <h3 className="text-indigo-800 text-lg font-bold mb-2">
                   Salary
                 </h3>
 
-                <p className="mb-4">{job.salary}/ Year</p>
+                <p className="mb-4">{job?.salary}/ Year</p>
               </div>
             </main>
 
@@ -67,35 +69,35 @@ const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-6">Company Info</h3>
 
-                <h2 className="text-2xl">{job.company.name}</h2>
+                <h2 className="text-2xl">{job?.company.name}</h2>
 
-                <p className="my-2">{job.company.description}</p>
+                <p className="my-2">{job?.company.description}</p>
 
                 <hr className="my-4" />
 
                 <h3 className="text-xl">Contact Email:</h3>
 
                 <p className="my-2 bg-indigo-100 p-2 font-bold">
-                  {job.company.contactEmail}
+                  {job?.company.contactEmail}
                 </p>
 
                 <h3 className="text-xl">Contact Phone:</h3>
 
                 <p className="my-2 bg-indigo-100 p-2 font-bold">
-                  {job.company.contactPhone}
+                  {job?.company.contactPhone}
                 </p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md mt-6">
                 <h3 className="text-xl font-bold mb-6">Manage Job</h3>
                 <Link
-                  to={`/edit-job/${job.id}`}
+                  to={`/edit-job/${job?.id}`}
                   className="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                 >
                   Edit Job
                 </Link>
                 <button
-                  onClick={() => onDeleteClick(job.id)}
+                  onClick={() => onDeleteClick(job?.id)}
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                 >
                   Delete Job
@@ -105,13 +107,16 @@ const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
           </div>
         </div>
       </section>
-    </>
+    </Suspense>
   );
 };
 
 const jobLoader = async ({ params }) => {
-  const res = await fetch(`/api/jobs/${params.id}`);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await axios.get(`http://localhost:8000/jobs/${params.id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching job data:", error);
+  }
 };
 export { JobsPages as default, jobLoader };
