@@ -10,4 +10,7 @@ export default defineConfig({
       "/api": "http://localhost:8000",
     },
   },
+  build: {
+    sourcemap: true, // ✅ This enables source maps in the production build
+  },
 });
