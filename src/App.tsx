@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import axios from "axios";
+import api from "./api/axios";
 import JobsPages, { jobLoader } from "./pages/JobsPages";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
@@ -19,17 +19,17 @@ import type { Job, NewJob } from "./types";
 const App: FC = () => {
   // Add Job
   const addJob = async (newJob: NewJob): Promise<void> => {
-    await axios.post("api/jobs", newJob);
+    await api.post("/jobs", newJob);
   };
 
   // Delete Job
   const deleteJob = async (id: string): Promise<void> => {
-    await axios.delete(`api/jobs/${id}`);
+    await api.delete(`/jobs/${id}`);
   };
 
   // Edit Job
   const updateJob = async (job: Job): Promise<void> => {
-    await axios.put(`/api/jobs/${job.id}`, job);
+    await api.put(`/jobs/${job.id}`, job);
   };
 
   const router = createBrowserRouter(

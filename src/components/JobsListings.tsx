@@ -3,7 +3,8 @@ import JobListing from "./JobListing";
 import Spinner from "./Spinner";
 import type { Job } from "../types";
 import type { FC } from "react";
-import axios from "axios";
+
+import api from "../api/axios"; // Adjust the import path as necessary
 
 interface JobsListingsProps {
   isHome?: boolean;
@@ -18,7 +19,7 @@ const JobsListings: FC<JobsListingsProps> = ({ isHome = false }) => {
       : import.meta.env.VITE_BACKEND_URL + "/jobs";
     const fetchJobs = async () => {
       try {
-        const res = await axios.get(apiUrl);
+        const res = await api.get(apiUrl);
         const data = await res.data;
 
         console.log({ data });

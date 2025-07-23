@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Suspense, type FC } from "react";
 import axios from "axios";
+import api from "../api/axios"; // Adjust the import path as necessary
 
 import type { Job } from "../types";
 interface JobsPagesProps {
@@ -113,7 +114,7 @@ const JobsPages: FC<JobsPagesProps> = ({ deleteJob }) => {
 
 const jobLoader = async ({ params }) => {
   try {
-    const res = await axios.get(`http://localhost:8000/jobs/${params.id}`);
+    const res = await api.get(`/jobs/${params.id}`);
     return res.data;
   } catch (error) {
     console.error("Error fetching job data:", error);
