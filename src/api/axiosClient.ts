@@ -1,11 +1,13 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "http://localhost:8000";
-axios.defaults.headers["Content-Type"] = "application/json";
-axios.defaults.timeout = 5000;
+// axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+// axios.defaults.headers["Content-Type"] = "application/json";
+// axios.defaults.timeout = 5000;
 
-axios.interceptors.response.use(
+const api = axios.create({});
+
+api.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -21,4 +23,4 @@ axios.interceptors.response.use(
   }
 );
 
-export default axios;
+export default api;

@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import api from "./api/axios";
+import api from "./api/axiosClient";
 import JobsPages, { jobLoader } from "./pages/JobsPages";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";

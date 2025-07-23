@@ -3,8 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Suspense, type FC } from "react";
-import axios from "axios";
-import api from "../api/axios"; // Adjust the import path as necessary
+import api from "../api/axiosClient"; // Adjust the import path as necessary
 
 import type { Job } from "../types";
 interface JobsPagesProps {

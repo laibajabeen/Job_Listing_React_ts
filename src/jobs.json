@@ -9,7 +9,7 @@
       "salary": "$70K - $80K",
       "company": {
         "name": "NewTek Solutions",
-        "description": "NewTek Solutions is a leading technology company specializing in web development and digital solutions. We pride ourselves on delivering high-quality products and services to our clients while fostering a collaborative and innovative work environment.ddddddddddddddddddddddddddddddddddddddd",
+        "description": "NewTek Solutions is a leading technology company specializing in web development and digital solutions. We pride ourselves on delivering high-quality products and services to our clients while fostering a collaborative and innovative work environment.",
         "contactEmail": "contact@teksolutions.com",
         "contactPhone": "555-555-5555"
       }
@@ -69,6 +69,20 @@
         "contactEmail": "contact@ipsumlorem.com",
         "contactPhone": "555-555-5555"
       }
+    },
+    {
+      "title": "bfbfb",
+      "type": "Full-Time",
+      "location": "fgfg",
+      "description": "bfb",
+      "salary": "Under $50K",
+      "company": {
+        "name": "fgfgf",
+        "description": "fggffffff",
+        "contactEmail": "laibajabeen357@gmail.com",
+        "contactPhone": "03425821876"
+      },
+      "id": "RSs4JJX"
     }
   ]
 }

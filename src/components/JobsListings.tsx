@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 import type { Job } from "../types";
 import type { FC } from "react";
 
-import api from "../api/axios"; // Adjust the import path as necessary
+import api from "../api/axiosClient"; // Adjust the import path as necessary
 
 interface JobsListingsProps {
   isHome?: boolean;
